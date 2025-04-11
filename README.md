@@ -15,13 +15,15 @@ Dieses Projekt ermöglicht eine interaktive Benutzeroberfläche (GUI) mit einem 
 
 ### Abhängigkeiten installieren
 
-Für dieses Projekt müssen einige Python-Abhängigkeiten installiert werden. Benutze dafür den folgenden Befehl. **Achtung**: Auf macOS solltest du `pip3` verwenden, auf Windows reicht `pip`.
+Für dieses Projekt müssen einige Python-Abhängigkeiten installiert werden. Benutze dafür den folgenden Befehl. 
+
+**Achtung**: Auf macOS solltest du `pip3` verwenden.
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-Auf Windows kannst du eventuell nur `pip` verwenden:
+Auf Windows solltest du `pip` verwenden:
 
 ```bash
 pip install -r requirements.txt
