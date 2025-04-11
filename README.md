@@ -49,7 +49,7 @@ Da das Projekt ein LLM-Modell (GPT-Neo) verwendet, ist es notwendig, dieses Mode
 
 ### Java GUI
 
-Die Java-Anwendung startet automatisch die beiden benötigten Python-Server (`gpt-neo-server.py` und `mcp-server.py`) beim Starten der GUI. Du musst die Server also nicht manuell starten. Alles was du tun musst, ist sicherzustellen, dass die Python-Umgebung korrekt eingerichtet ist und die Dependencies installiert sind.
+Die Java-Anwendung startet automatisch die beiden benötigten Python-Server (`gpt_neo_server.py` und `mcp_server.py`) beim Starten der GUI. Du musst die Server also nicht manuell starten. Alles was du tun musst, ist sicherzustellen, dass die Python-Umgebung korrekt eingerichtet ist und die Dependencies installiert sind.
 
 ## Nutzung
 
