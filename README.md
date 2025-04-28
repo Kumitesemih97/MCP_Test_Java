@@ -1,5 +1,5 @@
 
-# Interaktive Anwendung mit LLM (Language Model)
+# Interaktive Anwendung mit LLM (Large Language Model)
 
 ## Überblick
 
