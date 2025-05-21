@@ -2,9 +2,9 @@
 
 ## 🚀 Was ist das hier eigentlich?
 
-Willkommen in der Welt der KI! Diesmal mit einem besonders schlauen Kopf: **Qwen3 1.7B**, lokal ausgeführt über **[Ollama](https://ollama.com)**. Dieses Projekt zeigt dir, wie du ein Language Model so zähmst, dass es per Texteingabe Buttons in einer Java-GUI klickt. Jep, das ist so nerdig und cool, wie es klingt.
+Willkommen in der Welt der KI! Diesmal mit einem besonders schlauen Kopf: **Qwen3 4B**, lokal ausgeführt über **[Ollama](https://ollama.com)**. Dieses Projekt zeigt dir, wie du ein Language Model so zähmst, dass es per Texteingabe Buttons in einer Java-GUI klickt.
 
-Du schreibst z. B. *"Drück bitte den gelben Button"* und das System denkt nicht lange nach, sondern klickt los. Fast so, als hätte deine Tastatur plötzlich Finger bekommen.
+Du schreibst z. B. *"Drück bitte den gelben Button"* und das System denkt nicht lange nach, sondern klickt los.
 
 ---
 
@@ -13,7 +13,7 @@ Du schreibst z. B. *"Drück bitte den gelben Button"* und das System denkt nicht
 1. **💻 Java-GUI**  
    Drei Buttons: Rot, Blau, Gelb. Du gibst einen Text ein, das LLM denkt kurz nach und drückt den passenden Button.  
 
-2. **🧠 LLM mit Ollama (Qwen3 1.7B)**  
+2. **🧠 LLM mit Ollama (Qwen3 4B)**  
    Statt einem externen Server läuft jetzt **Qwen3** lokal über **Ollama** eine super einfache Möglichkeit, LLMs lokal zu nutzen (keine Cloud, keine Panik, alles offline).  
 
 3. **🐍 Python MCP-Server (`mcp_server.py`)**  
@@ -39,15 +39,15 @@ Wenn das klappt, weiter mit Schritt 2.
 
 ---
 
-### 🧠 2. Qwen3 1.7B Modell herunterladen
+### 🧠 2. Qwen3 4B Modell herunterladen
 
 Einmal das Modell in die Ollama-Welt holen:
 
 ```bash
-ollama pull qwen3:1.7b
+ollama pull qwen3:4b
 ```
 
-Du kannst auch andere Modelle probieren, aber dieses Projekt wurde auf `qwen3:1.7b` abgestimmt, also bleib am besten erstmal dabei.
+Du kannst auch andere Modelle probieren, aber dieses Projekt wurde auf `qwen3:4b` abgestimmt, also bleib am besten erstmal dabei.
 
 ---
 
@@ -89,7 +89,7 @@ Sobald Ollama läuft und das Modell bereitsteht, übernimmt die Java-Anwendung d
 ## ⚠️ Hinweise & Tipps
 
 - Achte darauf, dass **Ollama im Hintergrund läuft**, bevor du die Java-Anwendung startest.
-- Das Modell `qwen3:1.7b` muss einmalig mit `ollama pull` heruntergeladen werden – danach bleibt es lokal verfügbar.
+- Das Modell `qwen3:4b` muss einmalig mit `ollama pull` heruntergeladen werden – danach bleibt es lokal verfügbar.
 - Wenn du unter Windows arbeitest:  
   **Pass im Java-Code Zeile 102 und 108 an – `python3` ➔ `python`**, sonst startet das Skript nicht richtig.
 
@@ -98,7 +98,7 @@ Sobald Ollama läuft und das Modell bereitsteht, übernimmt die Java-Anwendung d
 ## 🛠️ Fehlerbehebung
 
 - **Java-GUI startet, aber nix passiert?**  
-  → Läuft Ollama? Modell geladen? Terminal sagt was von "No model found"? Dann hast du vermutlich `ollama pull qwen3:1.7b` vergessen.
+  → Läuft Ollama? Modell geladen? Terminal sagt was von "No model found"? Dann hast du vermutlich `ollama pull qwen3:4b` vergessen.
 
 - **Modell antwortet nicht sinnvoll?**  
   → Achte auf einfache Farbangaben in deinen Prompts. "Tiefschwarz" versteht das Modell vielleicht nicht als `"schwarz"` (und Schwarz ist hier eh kein Button 😉).
@@ -111,5 +111,3 @@ Sobald Ollama läuft und das Modell bereitsteht, übernimmt die Java-Anwendung d
 ## 🧪 Fazit
 
 Mit **Ollama + Qwen** hast du ein elegantes, lokales LLM-Setup, das dir eine smarte Interaktion mit deiner Java-GUI ermöglicht, ganz ohne Cloud, Registrierung oder API-Schlüssel. Einfach: installieren, starten, prompten. ✨
-
-Wenn du Lust auf mehr hast: Denk mal über Sprachsteuerung, Voice2Text oder weiterführende Aktionen nach. Dieses Setup ist ein großartiger Einstiegspunkt!
