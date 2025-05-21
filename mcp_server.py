@@ -13,19 +13,13 @@ Du kannst folgende Funktionen aufrufen:
 1. get_button_ids()
    - Gibt eine Liste aller verfügbaren Button-IDs zurück.
 
-2. press_red_button()
-   - Drückt den roten Button.
-
-3. press_blue_button()
-   - Drückt den blauen Button.
-
-4. press_yellow_button()
-   - Drückt den gelben Button.
+2. press_button_id()
+   - Drückt den im Prompt angegebenen Button.
 
 Antworte immer mit genau einem Funktionsaufruf aus der obigen Liste, z.B.:
 get_button_ids()
 oder
-press_red_button()
+press_button_id()
 
 Neben dem Funktionsaufruf kannst du auch erklären, warum du diese Funktion gewählt hast. Schreibe zuerst den Funktionsaufruf in einer eigenen Zeile, gefolgt von einer Leerzeile und dann deinem Reasoning-Text.
 """
@@ -64,7 +58,7 @@ def process_prompt(session_id, user_prompt, context):
         full_prompt = get_tool_instructions() + "\n\nNutzer: " + user_prompt
 
         ollama_payload = {
-            "model": "qwen3:1.7b",
+            "model": "qwen3:4b",
             "prompt": full_prompt,
             "stream": False
         }
@@ -146,5 +140,5 @@ def mcp_handler():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    print("✅ MCP-Server läuft auf Port 5006 mit Qwen3:1.7b via Ollama")
+    print("✅ MCP-Server läuft auf Port 5006 mit Qwen3:4b via Ollama")
     app.run(port=5006)
