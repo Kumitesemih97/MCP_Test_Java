@@ -4,7 +4,7 @@ import requests  # Um Anfragen an den Ollama-Server zu senden
 app = Flask(__name__)
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "qwen3:1.7b"  # So lautet der Modellname bei Ollama
+MODEL_NAME = "qwen3:4b"  # So lautet der Modellname bei Ollama
 
 @app.route("/generate", methods=["POST"])
 def generate():
