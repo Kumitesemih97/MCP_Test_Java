@@ -2,9 +2,9 @@
 
 ## 🚀 Was ist das hier eigentlich?
 
-Willkommen in der Welt der KI – diesmal mit einem besonders schlauen Kopf: **Qwen3 1.7B**, lokal ausgeführt über **[Ollama](https://ollama.com)**. Dieses Projekt zeigt dir, wie du ein Language Model so zähmst, dass es per Texteingabe Buttons in einer Java-GUI klickt. Jep, das ist so nerdig und cool, wie es klingt.
+Willkommen in der Welt der KI! Diesmal mit einem besonders schlauen Kopf: **Qwen3 1.7B**, lokal ausgeführt über **[Ollama](https://ollama.com)**. Dieses Projekt zeigt dir, wie du ein Language Model so zähmst, dass es per Texteingabe Buttons in einer Java-GUI klickt. Jep, das ist so nerdig und cool, wie es klingt.
 
-Du schreibst z. B. *"Drück bitte den gelben Button"* – und das System denkt nicht lange nach, sondern klickt los. Fast so, als hätte deine Tastatur plötzlich Finger bekommen.
+Du schreibst z. B. *"Drück bitte den gelben Button"* und das System denkt nicht lange nach, sondern klickt los. Fast so, als hätte deine Tastatur plötzlich Finger bekommen.
 
 ---
 
@@ -14,10 +14,10 @@ Du schreibst z. B. *"Drück bitte den gelben Button"* – und das System denkt n
    Drei Buttons: Rot, Blau, Gelb. Du gibst einen Text ein, das LLM denkt kurz nach und drückt den passenden Button.  
 
 2. **🧠 LLM mit Ollama (Qwen3 1.7B)**  
-   Statt einem externen Server läuft jetzt **Qwen3** lokal über **Ollama** – eine super einfache Möglichkeit, LLMs lokal zu nutzen (keine Cloud, keine Panik, alles offline).  
+   Statt einem externen Server läuft jetzt **Qwen3** lokal über **Ollama** eine super einfache Möglichkeit, LLMs lokal zu nutzen (keine Cloud, keine Panik, alles offline).  
 
 3. **🐍 Python MCP-Server (`mcp_server.py`)**  
-   Der gute alte Entscheidungsserver bleibt erhalten – nur dass er jetzt direkt mit Ollama spricht. Er analysiert den Modell-Output und klickt auf Basis der gefundenen Farbe den richtigen Button.
+   Der gute alte Entscheidungsserver bleibt erhalten, nur dass er jetzt direkt mit Ollama spricht. Er analysiert den Modell-Output und klickt auf Basis der gefundenen Farbe den richtigen Button.
 
 ---
 
@@ -25,7 +25,7 @@ Du schreibst z. B. *"Drück bitte den gelben Button"* – und das System denkt n
 
 ### 📅 1. Installiere Ollama
 
-Falls du Ollama noch nicht kennst – es ist quasi *Docker für KI-Modelle*, aber mit einem Turbo-Knopf.
+Falls du Ollama noch nicht kennst, es ist quasi *Docker für KI-Modelle*, aber mit einem Turbo-Knopf.
 
 👉 [Download Ollama](https://ollama.com/download)
 
@@ -47,7 +47,7 @@ Einmal das Modell in die Ollama-Welt holen:
 ollama pull qwen3:1.7b
 ```
 
-Du kannst auch andere Modelle probieren, aber dieses Projekt wurde auf `qwen3:1.7b` abgestimmt – also bleib am besten erstmal dabei.
+Du kannst auch andere Modelle probieren, aber dieses Projekt wurde auf `qwen3:1.7b` abgestimmt, also bleib am besten erstmal dabei.
 
 ---
 
@@ -110,6 +110,6 @@ Sobald Ollama läuft und das Modell bereitsteht, übernimmt die Java-Anwendung d
 
 ## 🧪 Fazit
 
-Mit **Ollama + Qwen** hast du ein elegantes, lokales LLM-Setup, das dir eine smarte Interaktion mit deiner Java-GUI ermöglicht – ganz ohne Cloud, Registrierung oder API-Schlüssel. Einfach: installieren, starten, prompten. ✨
+Mit **Ollama + Qwen** hast du ein elegantes, lokales LLM-Setup, das dir eine smarte Interaktion mit deiner Java-GUI ermöglicht, ganz ohne Cloud, Registrierung oder API-Schlüssel. Einfach: installieren, starten, prompten. ✨
 
-Wenn du Bock auf mehr hast: Denk mal über Sprachsteuerung, Voice2Text oder weiterführende Aktionen nach. Dieses Setup ist ein großartiger Einstiegspunkt!
+Wenn du Lust auf mehr hast: Denk mal über Sprachsteuerung, Voice2Text oder weiterführende Aktionen nach. Dieses Setup ist ein großartiger Einstiegspunkt!
