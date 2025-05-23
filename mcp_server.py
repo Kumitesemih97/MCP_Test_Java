@@ -14,7 +14,7 @@ Du kannst folgende Funktionen aufrufen:
 1. get_button_ids()
    - Gibt eine Liste aller verfügbaren Button-IDs zurück.
 
-2. press_button_id()
+2. press_button_by_id()
    - Drückt den im Prompt angegebenen Button.
 
 Antworte immer mit genau einem Funktionsaufruf aus der obigen Liste, z. B.:
@@ -55,7 +55,7 @@ def process_prompt(session_id, user_prompt, context):
         full_prompt = f"{get_tool_instructions()}\n\nNutzer: {user_prompt}"
 
         ollama_payload = {
-            "model": "qwen3:4b",
+            "model": "qwen3:1.7b",
             "prompt": full_prompt,
             "stream": False
         }
@@ -129,5 +129,5 @@ def mcp_handler():
 
 # 🏁 Los geht's!
 if __name__ == '__main__':
-    print("✅ MCP-Server läuft auf Port 5006 mit Qwen3:4b via Ollama")
+    print("✅ MCP-Server läuft auf Port 5006 mit Qwen3:1.7b via Ollama")
     app.run(port=5006)
