@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,9 +44,9 @@ public class LLMClient {
         // Color buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        JButton redButton = createColorButton("Red Button", Color.RED);
-        JButton blueButton = createColorButton("Blue Button", Color.BLUE);
-        JButton yellowButton = createColorButton("Yellow Button", Color.YELLOW);
+        JButton redButton = createColorButton("Red Button", Color.RED, Color.WHITE);
+        JButton blueButton = createColorButton("Blue Button", Color.BLUE, Color.WHITE);
+        JButton yellowButton = createColorButton("Yellow Button", Color.YELLOW, Color.BLACK);
 
         colorButtons.put("red_button", redButton);
         colorButtons.put("blue_button", blueButton);
@@ -63,7 +65,7 @@ public class LLMClient {
         JButton submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Arial", Font.BOLD, 16));
         submitButton.setBackground(new Color(100, 100, 100));
-        submitButton.setForeground(Color.WHITE);
+        submitButton.setForeground(Color.BLACK); // Nur dieser schwarz
         submitButton.setFocusPainted(false);
 
         inputPanel.add(userPromptField);
@@ -95,35 +97,32 @@ public class LLMClient {
 
     // Launches Ollama backend, Flask LLM server, and MCP server
     private static void startServers() throws IOException {
-        // Start Ollama backend
         ProcessBuilder ollamaBackend = new ProcessBuilder("ollama", "serve");
         ollamaBackend.redirectErrorStream(true);
         ollamaBackend.start();
         System.out.println("🦙 Ollama backend started...");
 
-        // Start Flask wrapper for the Ollama model
         ProcessBuilder ollamaServer = new ProcessBuilder("python3", "ollama_qwen3_server.py");
         ollamaServer.redirectErrorStream(true);
         ollamaServer.start();
         System.out.println("🧠 Ollama Qwen server started...");
 
-        // Start MCP server
         ProcessBuilder mcp = new ProcessBuilder("python3", "mcp_server.py");
         mcp.redirectErrorStream(true);
         mcp.start();
         System.out.println("🧩 MCP server started...");
 
         try {
-            Thread.sleep(2000);  // Wait a moment to allow servers to initialize
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private static JButton createColorButton(String text, Color color) {
+    private static JButton createColorButton(String text, Color bg, Color fg) {
         JButton button = new JButton(text);
-        button.setBackground(color);
-        button.setForeground(Color.WHITE);
+        button.setBackground(bg);
+        button.setForeground(fg);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(150, 50));
@@ -134,35 +133,30 @@ public class LLMClient {
 
     private static void sendRequestToServer(String prompt, JLabel label) {
         try {
-            URL url = new URL("http://127.0.0.1:5006/mcp_request");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setDoOutput(true);
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            HttpClient client = HttpClient.newHttpClient();
+            String form = "user_prompt=" + URLEncoder.encode(prompt, "UTF-8") + "&context=" + URLEncoder.encode("", "UTF-8");
 
-            String data = "user_prompt=" + URLEncoder.encode(prompt, "UTF-8") + "&context=" + URLEncoder.encode("", "UTF-8");
-            con.getOutputStream().write(data.getBytes());
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://127.0.0.1:5006/mcp_request"))
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .POST(HttpRequest.BodyPublishers.ofString(form))
+                    .build();
 
-            int responseCode = con.getResponseCode();
-            InputStream stream = (responseCode == 200) ? con.getInputStream() : con.getErrorStream();
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            StringBuilder responseBuilder = new StringBuilder();
-            String line;
-            while ((line = in.readLine()) != null) {
-                responseBuilder.append(line);
-            }
-            in.close();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            String responseStr = response.body();
 
-            String responseStr = responseBuilder.toString();
-            System.out.println("Server response: " + responseStr);
-
-            // Reset all button colors before highlighting the selected one
+            // Reset all button colors and text colors
             colorButtons.get("red_button").setBackground(Color.RED);
-            colorButtons.get("blue_button").setBackground(Color.BLUE);
-            colorButtons.get("yellow_button").setBackground(Color.YELLOW);
+            colorButtons.get("red_button").setForeground(Color.WHITE);
 
-            if (responseCode != 200) {
-                label.setText("Server error: " + responseCode + " - " + responseStr);
+            colorButtons.get("blue_button").setBackground(Color.BLUE);
+            colorButtons.get("blue_button").setForeground(Color.WHITE);
+
+            colorButtons.get("yellow_button").setBackground(Color.YELLOW);
+            colorButtons.get("yellow_button").setForeground(Color.BLACK);
+
+            if (response.statusCode() != 200) {
+                label.setText("Server error: " + response.statusCode() + " - " + responseStr);
                 label.setForeground(Color.RED);
                 return;
             }
